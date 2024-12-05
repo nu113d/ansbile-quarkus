@@ -1,0 +1,24 @@
+- name: Build and push
+  hosts: local
+  connection: local
+  tasks:
+    - name: Build
+      command: docker build -t edproject /home/user/project/
+
+    # start docker registry first
+    # docker run -d -p:5000:5000 --name registry registry:latest 
+    - name: Tag
+      command: docker tag edproject localhost:5000/edproject 
+
+    - name: Push
+      command: docker push localhost:5000/edproject
+
+- name: Pull image and start the container
+  hosts: docker_hosts
+  tasks:
+    - name: Pull
+      command: docker pull 192.168.2.6:5000/edproject
+    
+    - name: Start
+      command: docker run --rm -d -p 8080:8080 192.168.2.6:5000/edproject
+         
