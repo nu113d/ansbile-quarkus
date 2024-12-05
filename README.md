@@ -4,7 +4,7 @@ Test project for deploying a java quarkus project to other hosts
 ## project
 The java REST application with 3 endpoints
 
-## ansible-install-docker
+## ansible-docker-install
 Installs docker to the remote hosts
 
 ## ansible-deploy
